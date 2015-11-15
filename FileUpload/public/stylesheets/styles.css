@@ -1,0 +1,44 @@
+html,body {
+  height:100%;
+}
+
+h1 {
+  font-family: Verdana;
+  font-size:80px;
+  color:#14D90D;
+}
+
+.lead {
+	color:#137544;
+}
+
+/* Custom container */
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+  min-height:100%;
+  background-color:#110022;
+  color:#eee;
+  overflow:hidden;
+}
+
+.container-full a {
+  color:#efefef;
+  text-decoration:none;
+}
+
+.v-center {
+  margin-top:7%;
+}
+
+#videobcg { 
+     min-width: 100%;
+     min-height: 100%;
+     width: auto;
+     height: auto;
+	 position: fixed;
+	 top:0;
+	 left:0;
+	 z-index:auto;
+}
+  

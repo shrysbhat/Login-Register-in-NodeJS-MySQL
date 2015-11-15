@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+/* var policy = {"expiration": "2016-01-01T00:00:00Z",
+  "conditions": [ 
+    {"bucket": "cmpe280-kal"}, 
+    ["starts-with", "$key", "uploads/"],
+    {"success_action_redirect": "http://localhost:8080/cloud_security_framework/dashboard.html"},
+    ["starts-with", "$Content-Type", ""],
+    ["content-length-range", 0, 1048576]
+  ]
+  document.getElementById("pol").value = policy;
+}
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+	  
+    }
+  }
+xmlhttp.open("POST","http://localhost:8080/cloud_security_framework/csfContoller",true);
+alert(xmlhttp.readyState);
+alert(xmlhttp.status); */
+//xmlhttp.send("upload");
+</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cloud Security Solutions">
+    <meta name="Meet, Shreyas, & Kaylan" content="Cloud Security Solutions">
+    <title>Dashboard - Upload</title>
+    <link href="css/log.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23803557-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body ng-app="userUpload">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <a class="navbar-brand" href="/"> <div id="log1"><span class="glyphicon glyphicon-cloud"></span> Cloud Security Solutions</div></a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+                        
+                       
+                                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                       
+                           
+                        <li>
+                            <a href="/"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+             <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="/userdashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="/userupload"><span class="glyphicon glyphicon-cloud-upload"></span> Upload Files</a>
+                    </li>
+                    <li>
+                        <a href="/usermyfiles"><span class="glyphicon glyphicon-floppy-disk"></span> My Files</a>
+                    </li>
+                    <li>
+                        <a href="/usersettings"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                    </li>
+                    <li>
+                        <a href="/userpaymentdash"><span class="glyphicon glyphicon-usd"></span> Payment</a>
+                    </li>
+                    
+                    <li>
+                    	<a href="/usersupport"><span class="glyphicon glyphicon-comment"></span> Support</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li> -->
+                      </ul>
+                  </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <h3><span class="glyphicon glyphicon-cloud-upload"></span> Upload your files to your cloud</h3>
+            <p>
+            <p>
+            <p>
+            <div ng-controller="uploadController" id="upload">
+           	<center> 
+           	<!-- <form action="/upload" method="post" enctype="multipart/form-data">  -->
+           	<form method="post" enctype="multipart/form-data" action="/uploadfile">
+				<!-- <input file-model="myFile" name="file" type="file" accept="image/*,audio/*,video/*" /> -->
+				<input name="file" type="file" accept="image/*,audio/*,video/*" />
+				<!-- <input ng-click=upload() name="submit" value="Upload" type="submit" /> -->
+				<input name="submit" value="Upload" type="submit" />
+			</form>
+			</center>
+			</div>
+			</p>	
+       </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript 
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>-->
+    
+    <script>  
+    var userUpload = angular.module('userUpload', []);
+ 			 userUpload.controller( 'uploadController', function ($scope,$http,$location)
+ 			 {
+	 			$scope.upload = function(req, res){ 
+		 			$http({
+			   			method: 'POST',
+				        url: '/fileUpload',
+				        data: { "file": $scope.myFile}
+				        //data: file
+				        //cache : false	           		
+			        }
+			        ).success(function(response){            
+						if(response.user == "valid"){
+					    	window.location = '/userdashboard';
+					}
+					else{
+						window.location = '/login';
+					}
+					})
+				    .error(function(error){ 
+			        	alert(error);
+			            //alert("error - upload Failed - inside userupload .error");
+			        });   		
+	 			}; 			
+ 			 }); 
+    </script>
+</body>
+</html>
