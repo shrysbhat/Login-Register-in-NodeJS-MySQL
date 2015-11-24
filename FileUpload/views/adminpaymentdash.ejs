@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Meet, Shreyas, & Kaylan" content="Cloud Security Solutions">
+   
+    
+    <title>User Dashboard</title>
+    <link href="css/log.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS  
+    <link href="css/plugins/morris.css" rel="stylesheet"> -->
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        
+<!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"> 
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <a class="navbar-brand" href="#"> <div id="log1"><span class="glyphicon glyphicon-cloud"></span> Cloud Security Solutions</div></a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+                        
+                       
+                                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><em class="fa fa-user"></em> Admin <strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                       
+                           
+                        <li>
+                            <a href="/adminLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                     <li></li class="active">
+                    <li>
+                        <a href="/adminpolicyengine"><span class="glyphicon glyphicon-leaf"></span> Policy Engine</a>
+                    </li>
+                    <li>
+                        <a href="/adminuserportal"><span class="glyphicon glyphicon-user"></span> User Portal</a>
+                    </li>
+                    <li>
+                        <a href="/adminsettings"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                    </li>
+                    <li class="active">
+                        <a href="/adminpaymentdash"><span class="glyphicon glyphicon-usd"></span> Payment</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/adminsupport"><span class="glyphicon glyphicon-comment"></span> Support</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li> -->
+                      </ul>
+                  </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+		
+        
+        
+        
+        
+        <div id="page-wrapper">
+        	<h3><span class="glyphicon glyphicon-usd"></span>  Payment</h3>
+        	<div id="enter">
+			<form >
+			<div id="error"></div>
+                            	<ul>
+                            		<li><input id ="cc"placeholder="Enter Credit Card Number" type="password" required></li>
+                            		<li><input placeholder="MM/YY" pattern="\d{1,2}/\d{1,2}" type="text" required></li>
+                                    <li><input placeholder="CVC" type="text"></li>
+                                    <li></li>
+                                    <li><p></p></li>
+                                	<li><button type="submit" onclick="val()"class="btn btn-default">Confirm</button></li>
+                                    <li><p></p></li>
+                                    
+
+                             	</ul>
+                            	</form>   
+                       </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

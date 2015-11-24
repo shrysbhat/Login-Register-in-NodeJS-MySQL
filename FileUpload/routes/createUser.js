@@ -4,6 +4,11 @@ var app = express();
 var router = express.Router();
 var ejs = require("ejs");
 var crypto = require('crypto');
+var videoSchema = require('../models/videos.js');
+var userSchema = require('../models/users.js');
+var mongoose = require('mongoose');
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 
 /*
 var hash = function (pass, salt) {
@@ -16,70 +21,94 @@ var hash = function (pass, salt) {
 
 exports.signUp = function (req, res){
 	
-	var email= req.param("email");
-	var fname = req.param("fName");
-	var lname = req.param("lName");
-	var password = req.param("password");
-	console.log("email- " + email);
-	console.log("fname- " + fname);
-	console.log("lname- " + lname);
-	console.log("password- " + password);
-	//var groupid = req.param("groupid");
-	//var user_type = req.param("user_type");
-	//var encpassword = hash(password, email);
-	var StringQuery = "insert into DataSecService.user_records (email, fname, lname, password) " +
+	var email= req.body.email;
+	var fname = req.body.fname;
+	var lname = req.body.lname;
+	var password = req.body.password;
+	var keyphrase = req.body.keyphrase;
+
+	var StringQuery = "insert into DataSecService.user_records (email, fname, lname, password, keyphrase) " +
 			"values( \'" + email+ 
 			"\',\'" + fname + 
 			"\',\'" + lname + 
 			"\',\'" + password +
-//			"\',\'" + groupid + 
-//			"\',\'" + user_type + 
-//			"\',\'" + encpassword +  
+			"\',\'" + keyphrase +
 			"\');";
-	console.log("StringQuery- " + StringQuery);
+	//console.log("StringQuery- " + StringQuery);
 	mysql.fetchData(StringQuery, function(error, Results){
 		if(error){
-			throw error;
+			return;
 		}
 		else{
 			if(Results.affectedRows > 0){
 			var StringQuery = "select email from DataSecService.user_records where email=\'" + email + "\'";
-			console.log("query2- " + StringQuery);
+			//console.log("query2- " + StringQuery);
 			mysql.fetchData(StringQuery, function(error, Results){
 					if(error){
-						throw error;
+						//throw error;
+						return;
 					}
 					else{
 						if(Results.length > 0){
 							var emailid = Results[0].email;
-							req.session.email = emailid;
-							var StringQuery = "insert into DataSecService.access_control (email_id) values (\'" + emailid + "\');";
-							console.log("query3- " + StringQuery);
-							mysql.fetchData(StringQuery, function(error, Results){
-								if(error){
-									throw error;
-								}
-								else{
-									if(Results.affectedRows >0){
-										req.session.email = emailid;
-										var StringQuery = "insert into DataSecService.keyphrase (email_id) values (\'" + emailid + "\');";
-										console.log("query4- " + StringQuery);
+							//var keyphrase = Results[0].keyphrase;
+							//req.session.email = emailid;
+							//req.session.keyphrase = keyphrase;
+							//var StringQuery = "insert into DataSecService.access_control (group_id) values (\'00\');";
+							//console.log("query3- " + StringQuery);
+							//mysql.fetchData(StringQuery, function(error, Results){
+								//if(error){
+									//throw error;
+									//return;
+								//}
+								//else{
+									//if(Results.affectedRows >0){
+										//req.session.email = emailid;
+										req.session.keyphrase = keyphrase;
+										var StringQuery = "insert into DataSecService.keyphrase (email_id, keyphrase) values " +
+												"(\'" + emailid + "\'" +
+												",\'" + keyphrase + "\');";
+										//console.log("query4- " + StringQuery);
 										mysql.fetchData(StringQuery, function(error, Results){
 											if(error){
-												throw error;
+												//throw error;
+												return;
 											}
 											else{
 												if(Results.affectedRows >0){
 													req.session.email = emailid;
 													var StringQuery = "insert into DataSecService.folder_mapping (emailid) values (\'" + emailid + "\');";
-													console.log("query5- " + StringQuery);
+													//console.log("query5- " + StringQuery);
 													mysql.fetchData(StringQuery, function(error, Results){
 														if(error){
-															throw error;
+															//throw error;
+															return;
 														}
 														else{
 															if(Results.affectedRows >0){
-																res.send({"signup":"success"});
+																//res.send({"signup":"success"});
+																/* register on MongoDB */
+																var newUser = {
+																		email: req.body.email,
+																		password: req.body.password,
+																		files: []
+																	};
+
+																	newUser.fname = req.body.fname || '';
+																	newUser.lname = req.body.lname || '';
+																	newUser.user_type = 'U' || '';
+																	newUser.groupid = '00' || '';
+
+																	var item = new userSchema(newUser);
+																	item.save(function(err,data){
+																		if(err){
+																			console.log(err);
+																			res.send(err);
+																			return;
+																		}
+																		//res.send(data);
+																		res.send({"signup":"success"});
+																	});
 															}
 															else{
 																res.send("Error !!");
@@ -105,13 +134,128 @@ exports.signUp = function (req, res){
 						else{
 							res.send("Error !!");
 						}
-					}
-				});	
+					//}
+				//});	
 
-			}
+			//}
 		}
 	});	
+	
+	
 //exports.signUp = function (req, res)	
+}
+
+exports.adminSignUp = function (req, res){
+	
+	var email= req.body.email;
+	var fname = req.body.fname;
+	var lname = req.body.lname;
+	var password = req.body.password;
+	
+	var StringQuery = "insert into DataSecService.user_records (email, fname, lname, password, user_type) " +
+			"values( \'" + email 	+ "\'," +
+					"\'" + fname    + "\'," +
+					"\'" + lname 	+ "\'," +
+					"\'" + password + "\'," +
+//			"\',\'" + groupid + 
+					"\'" + 'A' 		+
+//			"\',\'" + encpassword +  
+			"\');";
+	//console.log("StringQuery- " + StringQuery);
+	mysql.fetchData(StringQuery, function(error, Results){
+		if(error){
+			//console.log("A error occured in Insert query", error);
+			return;
+		}
+		else{
+			if(Results.affectedRows > 0){
+			var StringQuery = "select email from DataSecService.user_records where email=\'" + email + "\'";
+			//console.log("query2- " + StringQuery);
+			mysql.fetchData(StringQuery, function(error, Results){
+					if(error){
+						return;
+					}
+					else{
+						if(Results.length > 0){
+							//var emailid = Results[0].email;
+							req.session.email = emailid;
+							//var StringQuery = "insert into DataSecService.access_control (email_id) values (\'" + emailid + "\');";
+							//console.log("query3- " + StringQuery);
+							//mysql.fetchData(StringQuery, function(error, Results){
+								//if(error){
+									//return;
+								//}
+								//else{
+									//if(Results.affectedRows >0){
+										//req.session.email = emailid;
+										var StringQuery = "insert into DataSecService.keyphrase (email_id) values (\'" + emailid + "\');";
+										//console.log("query4- " + StringQuery);
+										mysql.fetchData(StringQuery, function(error, Results){
+											if(error){
+												return;
+											}
+											else{
+												if(Results.affectedRows >0){
+													req.session.email = emailid;
+													var StringQuery = "insert into DataSecService.folder_mapping (emailid) values (\'" + emailid + "\');";
+													//console.log("query5- " + StringQuery);
+													mysql.fetchData(StringQuery, function(error, Results){
+														if(error){
+															return;
+														}
+														else{
+															if(Results.affectedRows >0){
+																//res.send({"signup":"success"});
+																/* register on MongoDB */
+																var newUser = {
+																		email: req.body.email,
+																		password: req.body.password,
+																		files: []
+																	};
+
+																	newUser.fname = req.body.fname || '';
+																	newUser.lname = req.body.lname || '';
+																	newUser.user_type = 'A' || '';
+																	newUser.groupid = '00' || '';
+
+																	var item = new userSchema(newUser);
+																	item.save(function(err,data){
+																		if(err){
+																			console.log(err);
+																			res.send(err);
+																			return;
+																		}
+																		//res.send(data);
+																		res.send({"signup":"success"});
+																	});
+															}
+															else{
+																res.send("Error !!");
+															}
+														}
+													});	
+													}
+												else{
+												res.send("Error !!");
+												}
+											}
+										});	
+							
+							//console.log("Inside SignUp - Results.length > 0");
+						}
+						else{
+							res.send("Error !!");
+						}
+					}
+					});	
+						}
+						else{
+							res.send("Error !!");
+						}
+					}
+				});	
+	
+
 }
 		
 //function Signedup(req,res)
@@ -133,37 +277,79 @@ exports.signUp = function (req, res){
 
 
 exports.signIn = function(req, res){
-	
-	var password = req.param("password");
-	var email = req.param("email");
-//	var newHash = hash(password, userName);
-//	console.log("password- " + password);
-//	console.log("email- " + email);
-//	console.log("new hash"+newHash);
-	var StringQuery= "select email, password from datasecservice.user_records where email =\'" + email+ "\';";
-//	console.log("StringQuery- " + StringQuery);
+	var password = req.body.password;
+	var email = req.body.email;
+
+	var StringQuery= "select email, password, keyphrase from datasecservice.user_records where email =\'" + email+ "\';";
 	mysql.fetchData(StringQuery, function(error, results){
 		if(error){
-			throw error;
+			return;
 		}
 		else{
-			//console.log("results.password-" + results[0].password);
-//			if(results[0].password == newHash){
-			if(results[0].password == password)
-			{
-				//console.log("results.pwd-" + results[0].password);
-				req.session.email = results[0].email;
-				res.send({"user":"valid"});
+			if(results.length > 0){
+				if(results[0].password == password && results[0].email == email)
+				{
+					req.session.email = results[0].email;
+					req.session.keyphrase = results[0].keyphrase;
+					res.send({"user":"valid"});
+				}
+				else{
+					res.send({"user":"invalid"});
+				}
 			}
 			else{
-				res.send({"user":"invalid"});
+				res.redirect('/login');
+			}
+		}
+	});
+	
+	/*
+	userSchema.findOne(
+			{"email": req.body.email, "password": req.body.password},
+			{},
+			{},
+			function(err,data){
+				if(err){
+					res.statusCode = 500;
+					res.send('internal server error');
+					return;
+				}
+
+				if(!data){
+					res.statusCode = 400;
+					res.redirect('/login');
+					return;
+				}
+
+				req.session.email = req.body.email;
+				res.redirect('/');
+				
+			});
+	*/
+}
+
+exports.adminSignIn = function(req, res){
+	var password = req.body.password;
+	var email = req.body.email;
+	var StringQuery= "select email, password from datasecservice.user_records where user_type = 'A' and email =\'" + email+ "\';";
+	mysql.fetchData(StringQuery, function(error, results){
+		if(error){
+			return;
+		}
+		else{
+			if(results.length > 0){
+				if(results[0].password == password)
+				{
+					req.session.email = results[0].email;
+					res.send({"admin":"valid"});
+				}
+				else{
+					res.send({"admin":"invalid"});
+				}
+			}
+			else{
+				res.redirect('/adminLogin');
 			}
 		}
 	});
 }
-
-
-//module.exports = router;
-//exports.signUp=signUp;
-//exports.Signedup=Signedup;
-//exports.signIn=signIn;

@@ -23,7 +23,7 @@ function getConnectionFromPool(){
 		var conn = getConnection();
 		p_stack.push(conn);
 	}
-	console.log("in getConnectionFromPool");
+	//console.log("in getConnectionFromPool");
 	var conn1 = p_stack.pop();
 	return conn1;
 }
@@ -32,19 +32,18 @@ function releaseConnection(conn){
 	p_stack.push(conn);
 }
 
-exports.fetchData = function(myquery, callback){
-	console.log("in fetchdata");
-	
+exports.fetchData = function(myquery, callback){	
 	var connection = getConnectionFromPool();	
 		connection.connect();
 		connection.query(myquery, function(error, Results){
 			if(error){
 				console.log("We are in fetchData error!!");
-				throw error;
+				return;
 			}
 			else{
-					callback(error, Results );
-				}	
+					releaseConnection(connection);
+					callback(error, Results);
+			}	
 	});
-		connection.end();
-}
+	connection.end();
+};

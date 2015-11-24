@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cloud Security Solutions">
+    <meta name="Meet, Shreyas, & Kaylan" content="Cloud Security Solutions">
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23803557-4', 'auto');
+  ga('send', 'pageview');
+
+
+var value = 0;
+//==========================================checkpassmatch==================================
+function checkpasswordmatch(){
+    var password = document.getElementById('pass').value;
+    var cpassword =document.getElementById('conpass').value;
+    if(password != cpassword)
+        document.getElementById('errorpass').innerHTML = "The password does not match.";
+    else
+        document.getElementById('errorpass').innerHTML = "The passwords match.";
+    
+}
+//===========================================passstrength===================================
+function passStrength(){
+    var desc = new Array();
+    desc[1] = "Normal";
+    desc[2] = "Medium";
+    desc[3] = "Strong";
+   var c1 = 0;
+   var c2 = 0;
+   var c3 = 0;
+  
+   var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+    var password = document.getElementById('pass').value;
+    var score   = 0;
+    
+    //alert("000000= " + score);
+    //if txtpass bigger than 4 give 1 point
+    document.getElementById('progress').innerHTML = '<progress value="'+value+'" max="100"></progress>';  
+    if(password != ""){
+    if(password.length > 7) {
+       for(var i =0; i<password.length;i++)
+       {      
+        //if txtpass has both lower and uppercase characters give 1 point
+        if ( ( password[i].match(/[a-z]/) ) ) c1++;
+        
+        if( ( password[i].match(/[A-Z]/) ) ) c2++;
+        //alert("22222= " + score);
+        //if txtpass has at least one number give 1 point
+        if (password[i].match(/\d+/)) c3++;
+        //if txtpass has at least one special caracther give 1 point
+        //.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)
+        if (iChars.indexOf (password[i] ) !=-1 ) c3++;
+        //if txtpass bigger than 8 give another 1 point
+       }
+   
+    if(c1 >= 2 && c2 >=3 )
+    {   
+        if (c3 == 2) score = 1 ;
+        if( c3 >= 3 && c3 <= 5) score = 2 ;
+        if(c3 > 5 ) score = 3 ;
+    } 
+    value = ((score > 0) ? (score * 33)+1 : score ) ;
+    if (value > 0 )
+    {
+        document.getElementById('passstrength').innerHTML = desc[score];
+        
+    }
+    else
+      document.getElementById('passstrength').innerHTML = 
+      "Password should contain atleast three uppercase letters, 
+      two lowercase letters, and two special characters"; 
+                
+  }
+    else {
+        document.getElementById('passstrength').innerHTML = "Password should be more than 6 characters.";
+    }
+     
+    }
+    else{
+        value = 0
+    }
+}
+</script>
+   
+    <title>New User Registration</title>
+   
+
+    <!-- Bootstrap Core CSS -->
+    <link 	href="/css/bootstrap.min.css" 
+    		rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link 	href="/css/log.css" 
+    		rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" 
+    		rel="stylesheet" 
+    		type="text/css">
+    <link 	href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" 
+    		rel="stylesheet" 
+    		type="text/css">
+    <link 	href="http://fonts.googleapis.com/css?family=Montserrat:400,700" 
+    		rel="stylesheet" 
+    		type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Latest compiled and minified CSS -->
+	<link 	rel="stylesheet" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" 
+			integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" 
+			crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link 	rel="stylesheet" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" 
+			integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" 
+			crossorigin="anonymous">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" 
+			integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" 
+			crossorigin="anonymous">
+	</script>
+
+	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body ng-app="signupApp" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <div id = "log"><a href="/"><span class="glyphicon glyphicon-cloud"></span></a> Cloud Security Solutions </div>
+    <!-- Intro Header -->
+    <header class="intro">
+     <!--   <div class="intro-body">
+         <!--   <div class="container">
+              <!--  <div class="row">
+                  <!--  <div class="col-md-8 col-md-offset-2"> -->
+                            
+                            <div ng-controller="signupController" id = "enter">
+                                <!-- <p><h4>Log In</h4></p> -->
+                                <form>
+                                <ul>
+                                
+                                    <li><input ng-model="fName" placeholder="First Name" id ="fName" type="text" required></li>
+                                    <br>
+                                    <li><input ng-model="lName" placeholder="Last Name" id="lName" type="text" required></li>
+                                    <br>
+                                    <li><input ng-model="email" placeholder="Email" id="email" type="email" required></li>
+                                    <br>
+                                    <li onkeyup="passStrength()"><input ng-model="password" placeholder="Password" id="pass" type="password" required></li>
+                                    <br>
+                                    <li id="progress"></li><li id="passstrength"></li>
+                                    <li onkeyup="checkpasswordmatch()"><input ng-model="confirmpassword" placeholder="Confirm Password" id="conpass" type="password" required></li>
+                                    
+                                    <li id="errorpass"></li>
+                                    <br>
+                                    <br>
+                                    <li><button ng-click="signup()" type="submit" class="btn btn-default">Register</button></li>
+                                    <li><p></p></li>
+                                    <br><br><br>
+                                    <li>By clicking Register, you agree to Om's <a href="#">terms and conditions</a> and <a href="#">privacy policy</a></li>
+
+                                </ul>
+                                </form>   
+                            </div>                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script> 
+
+<script>
+var signupApp = angular.module('signupApp', []);
+              
+ 			 signupApp.controller( 'signupController', function ($scope,$http,$location){
+ 				$scope.signup = function(){ $http({
+   				method: 'POST',
+	            url: '/createUser/adminSignUp',
+	            data: { "fname": $scope.fName, "lname":$scope.lName, "email":$scope.email, "password":$scope.password}
+	           		
+	           		})
+	           		.success(function(response){
+			            if(response.signup == "success"){
+			            alert("Successfully signed Up !!");
+			           		window.location = '/adminLogin';
+			           	}
+			            else{
+			            	window.location = '/adminRegister';
+			            }
+			        })
+	        		.error(function(error){
+				        alert("Signup Failed!!");
+	        		});   		
+ 			}; 			
+ 			});	
+</script>
+</body>
+</html>

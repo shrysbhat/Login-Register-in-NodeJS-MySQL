@@ -5,9 +5,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var session = require('express-session');
-//var ejs = require('ejs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -15,14 +15,13 @@ var users = require('./routes/users');
 var home = require('./routes/home');
 var createUser = require('./routes/createUser');
 var userdashboard = require('./routes/userdashboard');
-//var upload = require('./routes/upload');
 
 var app = express();
 
 var server = http.createServer(app);
 
 
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -39,6 +38,14 @@ app.use(session({
 		 resave: true,
 		    saveUninitialized: true
 }));
+
+mongoose.connect('mongodb://127.0.0.1:27017/project295b', function(err){
+	  if(err)
+		  {console.log(err);
+	    console.log("Error connecting database");}
+	  else
+	    console.log("Successfully connected to database");
+	});
 
 app.use('/', routes);
 app.use('/users', users);
@@ -73,13 +80,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-//app.post('/createUser/signIn', createUser.signIn);
-//app.get('/aboutUs', home.aboutUs);
-//app.get('/upload', home.upload);
-//app.get('/userdashboard', userdashboard);
-
-//app.get('/createUser/signUp', createUser.signUp);
 
 server.listen(app.get('port'), function(){
 	  console.log('Server listening on port ' + app.get('port') + '...');

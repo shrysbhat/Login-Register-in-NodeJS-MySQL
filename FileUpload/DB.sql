@@ -77,4 +77,11 @@ use DataSecService;
     
 
 select * from user_records;
+Select * from keyphrase;
+select * from access_control;
 select * from folder_mapping;
+
+ALTER TABLE DataSecService.access_control
+DROP COLUMN image_download, 
+DROP COLUMN audio_download, 
+DROP COLUMN video_download;

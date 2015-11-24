@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cloud Security Solutions">
+    <meta name="Meet, Shreyas, Jay, & Krishna" content="Cloud Security Solutions">
+    <title>General Policies</title>
+
+
+	<script src="codebase/dhtmlxcommon.js" type="text/javascript" charset="utf-8"></script>
+	<script src="codebase/dhtmlxgrid.js" type="text/javascript" charset="utf-8"></script>
+	<script src="codebase/dhtmlxgridcell.js" type="text/javascript" charset="utf-8"></script>
+	<script src="codebase/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
+
+<link rel="stylesheet" href="codebase/dhtmlxgrid.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="codebase/skins/dhtmlxgrid_dhx_skyblue.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+ <script type="text/javascript" charset="utf-8">
+	function init() 
+	{
+		mygrid = new dhtmlXGridObject("grid_here");
+		mygrid.setImagePath("../../codebase/imgs/");
+		mygrid.setHeader("id,policy,ugroup,encryption,keyphrase,audio,video,image");
+		mygrid.setColumnIds("id,policy,ugroup,encryption,keyphrase,audio,video,image");
+		mygrid.setInitWidths("70,*,*,*,*,*,*,70");
+		mygrid.setColTypes("dyn,ed,ed,ed,ed,ed,ed,ed");
+		mygrid.setColSorting("int,str,int,str,int,int,int,int");
+		
+		mygrid = new dhtmlXGridObject("grid_here");
+		mygrid.setImagePath("../../codebase/imgs/");
+		mygrid.setHeader("id,username,firstname,lastname,urole,ugroup");
+		mygrid.setColumnIds("id,username,firstname,lastname,urole,ugroup");
+		mygrid.setInitWidths("70,*,*,*,*,70");
+		mygrid.setColTypes("dyn,ed,ed,ed,ed,ed");
+		mygrid.setColSorting("int,str,str,str,str,int"); */
+		mygrid.setSkin("dhx_skyblue");
+		mygrid.init();
+		mygrid.load("/grid", "js");
+	
+		var dp = new dataProcessor("/grid");
+		dp.init(mygrid);
+		dp.enableDataNames(true);
+	
+		dp.setTransactionMode("POST", false);
+	
+	
+	//mygrid.parse("/grid", "js");
+} 
+	
+	function addrow()
+	{
+		var newid = mygrid.uid();
+		mygrid.setActive(true);
+
+		mygrid.addRow(newid,"");
+		mygrid.selectRowById(newid);
+	} 
+	
+	function deleterow()
+	{
+		mygrid.deleteSelectedRows();
+	}
+	
+</script>
+    
+    <link href="css/log.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<!--
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23803557-4', 'auto');
+  ga('send', 'pageview');
+
+</script> -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <a class="navbar-brand" href="/index"> <div id="log1"><span class="glyphicon glyphicon-cloud"></span> Cloud Security Solutions</div></a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><em class="fa fa-user"></em> Admin <strong class="caret"></strong></a>
+                                  <ul class="dropdown-menu">
+                        <li>
+                            <a href="/adminLogout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li></li>
+                    <li class="active">
+                        <a href="/adminpolicyengine"><span class="glyphicon glyphicon-leaf"></span> Policy Engine</a>
+                    </li>
+                    <li active="class">
+                        <a href="/adminuserportal"><span class="glyphicon glyphicon-user"></span> User Portal</a>
+                    </li>
+                    <li>
+                        <a href="/adminsettings"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                    </li>
+                    <li>
+                        <a href="/adminpaymentdash"><span class="glyphicon glyphicon-usd"></span> Payment</a>
+                    </li>
+                    <li>
+                        <a href="/adminsupport"><span class="glyphicon glyphicon-comment"></span> Support</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li> -->
+              			</ul>
+                  	</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+          <h3><span class="glyphicon glyphicon-user"></span> General Policies</h3>
+            <p>
+            <p>
+            <p>
+            <br>
+            <br>
+            <div id="error">
+            <div class="container">
+            <form action="/adminuserportal">
+  			<table class="table table-condensed table-hover table-striped">
+		    <thead>
+		      <tr>
+		        <th><center>#</center></th>
+		        <th><center>Policy Name</center></th>
+		        <th><center>Group No.</center></th>
+		        <th><center>Audio</center></th>
+		        <th><center>Video</center> </th>
+		        <th><center>Image</center></th>
+		        <th><center>Keyphrase Requirement </center></th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		      <tr>
+		      	<td>1</td>
+		        <td>Policy 1</td>
+		        <td>00</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		        <td>Y</td>
+		      </tr>
+		    </tbody>
+		</table>
+  		<br>
+    	<li><button type="submit" class="btn btn-default">Edit Privileges</button></li>
+    	</form>
+		</div>
+		</div>
+		</p>			
+       </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Morris Charts JavaScript
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script> -->
+</body>
+</html>

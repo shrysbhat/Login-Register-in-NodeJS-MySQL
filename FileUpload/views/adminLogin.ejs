@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+<script> 
+ function sessions(){
+	var username =  document.getElementById("uname").value;
+	if(typeof(Storage) !== "undefined") {
+		alert("inside");
+	    sessionStorage.setItem('user',username);
+	    alert(sessionStorage.getItem('user'));
+	} else {
+	    
+	}
+} -->
+</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cloud Security Solutions">
+    <meta name="Meet, Shreyas, & Jay Mehta" content="Cloud Security Solutions">
+    
+    <title>Admin Log In</title>
+   
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/log.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23803557-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+
+</head>
+
+<body ng-app="adminLoginApp" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!-- Navigation -->
+    <div id = "log"><a href="/index"><span class="glyphicon glyphicon-cloud"></span></a> Cloud Security Solutions </div>
+    <!-- Intro Header -->
+    <header class="intro">
+                            <div id = "enter">
+                            	<form ng-controller="adminLoginController">
+                            	<ul>
+                            		<li><input ng-model="email" id="email" placeholder="Admin Email Address" type="email" required onchange="sessions()"></li>
+                            		<li><input ng-model="password" id="pass" placeholder="Password" type="password" required></li>
+                                    <!-- <input id="pass" placeholder="Keyphrase" type="password" required></li> --><li>
+                                    <li></li>
+                                    <li><p></p></li>
+                                	<li><button ng-click="signin()" id="login" type="submit" class="btn btn-default">Log In</button></li>
+                                    <li><p></p></li>
+                             	</ul>
+                            	</form>   
+                            </div>                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script> 
+
+<script>  
+
+
+    var adminLoginApp = angular.module('adminLoginApp', []);
+ 			 adminLoginApp.controller( 'adminLoginController', function ($scope,$http,$location)
+ 			 {
+				//alert("inside adminLoginApp script http");
+	 			$scope.signin = function(){ 
+		 			$http({
+			   			method: 'POST',
+				        url: '/createUser/adminSignIn',
+				        data: { "email": $scope.email, "password":$scope.password}	           		
+			        }).success(function(response){            
+						if(response.admin == "valid"){
+					    	window.location = '/adminpolicyengine';
+						}
+						else{
+							window.location = '/adminLogin';
+						}
+					})
+				    .error(function(error){ 
+			        	console.log("we are in adminLogin error!!");
+			            alert("error - SignIn Failed!!");
+			        });   		
+	 			}; 			
+ 			 });
+    </script>
+</body>
+</html>

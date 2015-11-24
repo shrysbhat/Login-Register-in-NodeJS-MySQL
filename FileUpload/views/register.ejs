@@ -160,9 +160,9 @@ function passStrength(){
                                 <form>
                                 <ul>
                                 
-                                    <li><input ng-model="fName" placeholder="First Name" id ="fName" type="text" required></li>
+                                    <li><input ng-model="fname" placeholder="First Name" id ="fname" name="fname" type="text" required></li>
                                     <br>
-                                    <li><input ng-model="lName" placeholder="Last Name" id="lName" type="text" required></li>
+                                    <li><input ng-model="lname" placeholder="Last Name" id="lname" name="lname" type="text" required></li>
                                     <br>
                                     <li><input ng-model="email" placeholder="Email" id="email" type="email" required></li>
                                     <br>
@@ -172,6 +172,8 @@ function passStrength(){
                                     <li onkeyup="checkpasswordmatch()"><input ng-model="confirmpassword" placeholder="Confirm Password" id="conpass" type="password" required></li>
                                     
                                     <li id="errorpass"></li>
+                                    <br>
+                                    <li><input ng-model="keyphrase" placeholder="Secret Keyphrase" id="keyphrase" type="password" required></li>
                                     <br>
                                     <br>
                                     <li><button ng-click="signup()" type="submit" class="btn btn-default">Register</button></li>
@@ -213,7 +215,7 @@ var signupApp = angular.module('signupApp', []);
  				$scope.signup = function(){ $http({
    				method: 'POST',
 	            url: '/createUser/signUp',
-	            data: { "fname": $scope.fName, "lname":$scope.lName, "email":$scope.email, "password":$scope.password}
+	            data: { "fname": $scope.fname, "lname":$scope.lname, "email":$scope.email, "password":$scope.password, "keyphrase":$scope.keyphrase}
 	           		
 	           		})
 	           		.success(function(response){
